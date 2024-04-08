@@ -8,12 +8,12 @@
     justify-content: space-between;
     background-color: white;
     border-radius: 24px;
-    width: 65%;
+    width: 40%;
     color: var(--cinza);
 }
 
 .grafico {
-    width: 30vw;
+    width: 20vw;
 }
 
 .grafico__titulo {
@@ -37,7 +37,9 @@
 .grafico__ilustracao-euro {
     background-image: url('../imagens/euro.png');
 }
-
+.grafico__ilustracao-libra {
+    background-image: url('../imagens/libra.png');
+}
 .grafico__titulo h2 {
     color: var(--cinza);
     font-weight: 700;
@@ -51,4 +53,8 @@
 
 .investimentos__lista li {
     margin: 1em 0;
+}
+.graficos{
+    display: flex;
+    flex-wrap: wrap;
 }

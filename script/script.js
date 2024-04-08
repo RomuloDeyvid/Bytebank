@@ -2,6 +2,8 @@ import selecionaCotacao from "./imprimeCotacao.js";
 import imprimeCotacao from "./imprimeCotacao.js";
 const graficoDolar = document.querySelector('#graficoDolar')
 const graficoIene = document.querySelector('#graficoIene')
+const graficoEuro = document.querySelector('#graficoEuro')
+const graficoLibra = document.querySelector('#graficoLibra')
 
 const graficoParaDolar = new Chart(graficoDolar, {
   type: 'line',
@@ -21,6 +23,30 @@ const graficoParaIene = new Chart(graficoIene, {
     labels: [],
     datasets: [{
       label: 'Iene',
+      data: [],
+      borderWidth: 1
+    }]
+  },
+});
+
+const graficoParaEuro = new Chart(graficoEuro, {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Euro',
+      data: [],
+      borderWidth: 1
+    }]
+  },
+});
+
+const graficoParaLibra = new Chart(graficoLibra, {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Libra',
       data: [],
       borderWidth: 1
     }]
@@ -65,4 +91,26 @@ workerIene.addEventListener('message', event =>{
   
   adicionarDados(graficoParaIene, tempo, valor)
   selecionaCotacao('iene', valor)
+})
+
+let workerEuro = new Worker('./script/workers/workerEuro.js')
+workerEuro.postMessage('euro')
+
+workerEuro.addEventListener('message', event =>{
+  let tempo = geraHorario()
+  let valor = event.data.ask
+  
+  adicionarDados(graficoParaEuro, tempo, valor)
+  selecionaCotacao('euro', valor)
+})
+
+let workerLibra = new Worker('./script/workers/workerLibra.js')
+workerLibra.postMessage('libra')
+
+workerLibra.addEventListener('message', event =>{
+  let tempo = geraHorario()
+  let valor = event.data.ask
+  
+  adicionarDados(graficoParaLibra, tempo, valor)
+  selecionaCotacao('libra', valor)
 })
