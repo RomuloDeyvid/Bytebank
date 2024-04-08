@@ -1,4 +1,4 @@
-<h1><Projeto ByteBank</h1>
+<h1>Projeto ByteBank </h1>
 <h2>Desenvolvido pra visualização das cotações das principais moedas.</h2>
 <h3>Dê uma olhada no projeto: </h3>
 <p>https://ro-bank-cotacao-de-moedas.vercel.app/</p>
