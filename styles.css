@@ -2,6 +2,7 @@
 @import url("./styles/cabecalho.css");
 @import url("./styles/rodape.css");
 @import url("./styles/sidebar.css");
+@import url("./styles/app.css");
 
 :root {
     --lilas: #E4E9F6;
