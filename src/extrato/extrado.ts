@@ -1,3 +1,5 @@
+import { Tiporansacao } from "../enums/transacao.js";
+
 let saldo = 3000;
 
 const elementoSaldo = document.querySelector('.saldo-valor .valor') as HTMLElement;
@@ -43,3 +45,16 @@ elementoFormulario.addEventListener('submit', function (event) {
     elementoSaldo.textContent = saldo.toString();
 
 });
+
+type Transacao = {
+    tipoTransacao: Tiporansacao,
+    data : Date,
+    valor: number
+}
+
+const novaTransacao : Transacao = {
+    tipoTransacao : Tiporansacao.DEPOSITO,
+    data: new Date(),
+    valor: 0
+
+}

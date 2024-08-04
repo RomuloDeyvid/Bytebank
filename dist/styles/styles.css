@@ -1,8 +1,8 @@
-@import url("./styles/grafico.css");
-@import url("./styles/cabecalho.css");
-@import url("./styles/rodape.css");
-@import url("./styles/sidebar.css");
-@import url("./styles/app.css");
+@import url("./grafico.css");
+@import url("./cabecalho.css");
+@import url("./rodape.css");
+@import url("./sidebar.css");
+@import url("./app.css");
 
 :root {
     --lilas: #E4E9F6;
