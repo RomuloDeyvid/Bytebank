@@ -1,8 +1,15 @@
-import { Tiporansacao } from "../enums/transacao.js";
+import { FormatoData } from "../enums/formatoData.js";
+import { TipoDeTransacao } from "../enums/tipoDeTransacao.js";
+import { formatarData, formatarMoeda } from "../Formatador/formatador.js";
 let saldo = 3000;
 const elementoSaldo = document.querySelector('.saldo-valor .valor');
+const elementoDataAcesso = document.querySelector('.block-saldo time');
 if (elementoSaldo != null) {
-    elementoSaldo.textContent = saldo.toString();
+    elementoSaldo.textContent = formatarMoeda(saldo);
+}
+if (elementoDataAcesso != null) {
+    const dataAtual = new Date();
+    elementoDataAcesso.textContent = formatarData(dataAtual, FormatoData.DIA_SEMANA_DIA_MES_ANO);
 }
 const elementoFormulario = document.querySelector('.block-nova-transacao form');
 elementoFormulario.addEventListener('submit', function (event) {
@@ -14,29 +21,30 @@ elementoFormulario.addEventListener('submit', function (event) {
     const inputTipoTransacao = document.querySelector('#tipoTransacao');
     const inputValor = document.querySelector('#valor');
     const inputData = document.querySelector('#data');
-    let tipoTransacao = inputTipoTransacao.value;
+    let tipoDeTransacao = inputTipoTransacao.value;
     let valor = inputValor.valueAsNumber;
     let data = new Date(inputData.value);
-    if (tipoTransacao == 'Depósito') {
+    if (tipoDeTransacao == TipoDeTransacao.DEPOSITO) {
         saldo += valor;
+        const novaTransacao = {
+            tipoDeTransacao,
+            valor: valor,
+            data: data,
+        };
+        console.log(novaTransacao);
     }
-    else if (tipoTransacao == 'Transferência' || tipoTransacao == 'Pagamento de Boleto') {
+    else if (tipoDeTransacao == TipoDeTransacao.TRANSFERENCIA || tipoDeTransacao == TipoDeTransacao.PAGAMENTO_BOLETO) {
         saldo -= valor;
-        console.log(`Novo saldo após ${tipoTransacao}: ${saldo}`);
+        console.log(`Novo saldo após ${tipoDeTransacao}: ${saldo}`);
+        const novaTransacao = {
+            tipoDeTransacao,
+            valor: valor,
+            data: data,
+        };
+        console.log(novaTransacao);
     }
     else {
         alert('Tipo de transação inválida');
     }
-    const novaTransacao = {
-        tipoTransacao,
-        valor,
-        data
-    };
-    console.log(novaTransacao);
-    elementoSaldo.textContent = saldo.toString();
+    elementoSaldo.textContent = formatarMoeda(saldo);
 });
-const novaTransacao = {
-    tipoTransacao: Tiporansacao.DEPOSITO,
-    data: new Date(),
-    valor: 0
-};
