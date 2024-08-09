@@ -1,4 +1,4 @@
-import { FormatoData } from "../enums/formatoData.js";
+import { FormatoData } from "../enums/FormatoData.js"
 import { TipoDeTransacao } from "../enums/tipoDeTransacao.js";
 import { formatarData, formatarMoeda } from "../Formatador/formatador.js";
 
@@ -25,7 +25,7 @@ const elementoFormulario = document.querySelector('.block-nova-transacao form') 
 elementoFormulario.addEventListener('submit', function (event) {
     event.preventDefault();
     if (!elementoFormulario.checkValidity()) {
-        alert('oi');
+        alert('Os dados do formulário não é válido');
         return;
     }
 
@@ -39,6 +39,11 @@ elementoFormulario.addEventListener('submit', function (event) {
 
 
     if (tipoDeTransacao == TipoDeTransacao.DEPOSITO) {
+
+        if(valor <= 0){
+            throw new Error ('O valor depositado deve ser maior que zero.')
+        }
+
         saldo += valor
 
         const novaTransacao: Transacao = {
@@ -49,6 +54,13 @@ elementoFormulario.addEventListener('submit', function (event) {
         console.log(novaTransacao)
 
     } else if (tipoDeTransacao == TipoDeTransacao.TRANSFERENCIA || tipoDeTransacao == TipoDeTransacao.PAGAMENTO_BOLETO) {
+
+        if (valor > saldo){
+            throw new Error (`O valor ${formatarMoeda(valor)} de ${tipoDeTransacao} é maior que o saldo ${formatarMoeda(saldo)}`)
+        }
+        if(valor <= 0 ){
+            throw new Error ('O valor solicitado deve ser maior que zero.')
+        }
         saldo -= valor
         console.log(`Novo saldo após ${tipoDeTransacao}: ${saldo}`);
         const novaTransacao: Transacao = {
@@ -58,7 +70,7 @@ elementoFormulario.addEventListener('submit', function (event) {
         }
         console.log(novaTransacao)
     } else {
-        alert('Tipo de transação inválida')
+        throw new Error ('Tipo de transação inválida')
     }
 
 

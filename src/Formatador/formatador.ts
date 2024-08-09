@@ -1,4 +1,4 @@
-import { FormatoData } from "../enums/formatoData.js"
+import { FormatoData } from "../enums/FormatoData.js"
 
 export function formatarMoeda(valor: number): string {
     return valor.toLocaleString("pt-br", { currency: 'BRL', style: "currency" })
@@ -26,4 +26,8 @@ export function formatarData(data: Date, formato: FormatoData = FormatoData.PADR
         year: 'numeric'
     })
 
+}
+
+export function Formatador (valor: number, data: Date, formato: FormatoData = FormatoData.DIA_MES) : string {
+    return `${formatarMoeda(valor)} - ${formatarData(data, formato)}`
 }

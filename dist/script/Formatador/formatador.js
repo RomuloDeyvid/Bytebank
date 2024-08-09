@@ -1,4 +1,4 @@
-import { FormatoData } from "../enums/formatoData.js";
+import { FormatoData } from "../enums/FormatoData.js";
 export function formatarMoeda(valor) {
     return valor.toLocaleString("pt-br", { currency: 'BRL', style: "currency" });
 }
@@ -22,4 +22,7 @@ export function formatarData(data, formato = FormatoData.PADRAO) {
         month: '2-digit',
         year: 'numeric'
     });
+}
+export function Formatador(valor, data, formato = FormatoData.DIA_MES) {
+    return `${formatarMoeda(valor)} - ${formatarData(data, formato)}`;
 }
